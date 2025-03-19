@@ -12,6 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+PORT=process.env.PORT || 8000
 //mongodb+srv://Shashank:<db_password>@shashank.e1gzg.mongodb.net/?retryWrites=true&w=majority&appName=Shashank
 
 //"mongodb://localhost:27017/Developers"
@@ -46,6 +48,8 @@ const UserSchema = new mongoose.Schema({
     age: Number,
     gender: String,
 });
+
+
 
 const User = mongoose.model("User", UserSchema);
 
@@ -93,4 +97,4 @@ app.post("/login", async (req, res) => {
 
 app.use("/uploads", express.static("uploads"));
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(PORT, () => console.log("Server running on port"+PORT));
