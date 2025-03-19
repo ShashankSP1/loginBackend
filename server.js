@@ -48,12 +48,12 @@ const upload = multer({ storage: storage });
 // Signup API
 app.post("/signup", async (req, res) => {
     try {
-        const { email, password, confirmPassword, mobile, name, experience, age, gender } = req.body;
+        const { email, password, confirmPassword } = req.body;
         if (password !== confirmPassword) {
             return res.status(400).json({ message: "Passwords do not match" });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ email, password: hashedPassword, mobile, name, experience, age, gender });
+        const newUser = new User({ email, password: hashedPassword});
         await newUser.save();
         res.status(201).json({ message: "Signup successful!" });
     } catch (error) {
